@@ -51,7 +51,8 @@ export const audio = {
   musicLevel1: new Howl({
     src: [audioMusicLevel1],
     volume: 0.1,
-    loop : true,  
+    loop : true, 
+    autoplay:true, 
   }),
   obtainPower: new Howl({
     src: [audioObtainPower],

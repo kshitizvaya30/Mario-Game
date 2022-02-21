@@ -10,7 +10,7 @@ import {
   hitSideOfPlatform,
   ObjectsTouch,
 } from "./util.js";
-  
+
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 canvas.width = 1024;
@@ -169,7 +169,7 @@ class Platform {
 }
 
 class GenericObject {
-  constructor({ x, y, image }) {
+  constructor({ x, y, image, width = image.width, height = image.height }) {
     this.position = {
       x,
       y,
@@ -180,8 +180,8 @@ class GenericObject {
 
     this.image = image;
 
-    this.width = image.width;
-    this.height = image.height;
+    this.width = width;
+    this.height = height;
   }
 
   draw() {
@@ -370,6 +370,7 @@ let genericObjects = [];
 let goombas = [];
 let particles = [];
 let fireFlowers = [];
+let gameOver = false;
 
 let keys = {};
 let lastKey;
@@ -974,6 +975,15 @@ function animate() {
   c.fillStyle = "white";
   c.fillRect(0, 0, canvas.width, canvas.height);
 
+  if (gameOver) {
+    genericObjects = new GenericObject({
+      x: -175,
+      y: 0,
+      image: createImage(images.levels[1].gameOverImage),
+    });
+    genericObjects.update();
+  }
+
   genericObjects.forEach((genericObjects) => {
     genericObjects.update();
     genericObjects.velocity.x = 0;
@@ -1075,6 +1085,9 @@ function animate() {
       //switch to next level
       setTimeout(() => {
         currentLevel++;
+        if (currentLevel === 3) {
+          gameOver = true;
+        }
         gravity = 2.0;
         selectLevel(currentLevel);
       }, 8000);
@@ -1391,6 +1404,7 @@ function animate() {
 //end Animation loop ends
 
 selectLevel(1);
+gameOver = false;
 animate();
 
 window.addEventListener("keydown", ({ keyCode }) => {
