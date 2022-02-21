@@ -380,7 +380,6 @@ let game;
 let currentLevel = 1;
 
 function selectLevel(currentLevel) {
-  if (!audio.musicLevel1.play()) audio.musicLevel1.play();
   switch (currentLevel) {
     case 1:
       init();
@@ -976,9 +975,11 @@ function animate() {
   c.fillRect(0, 0, canvas.width, canvas.height);
 
   if (gameOver) {
+    c.fillStyle = "black";
+    c.fillRect(0, 0, canvas.width, canvas.height);
     genericObjects = new GenericObject({
-      x: -175,
-      y: 0,
+      x: 200,
+      y: 150,
       image: createImage(images.levels[1].gameOverImage),
     });
     genericObjects.update();

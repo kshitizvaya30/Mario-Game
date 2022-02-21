@@ -33,7 +33,7 @@ const mdPlatform = "../Assests/mdPlatform.png";
 const lgPlatform = "../Assests/lgPlatform.png";
 const tPlatform = "../Assests/tPlatform.png";
 const xtPlatform = "../Assests/xtPlatform.png";
-const gameOverImage = "../Assests/mario-dead-red .jpg";
+const gameOverImage = "../Assests/mario-dead-red.png";
 
 export const images = {
   levels: {
